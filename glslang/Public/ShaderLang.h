@@ -92,15 +92,21 @@ typedef enum {
     EShLangGeometry,
     EShLangFragment,
     EShLangCompute,
-    EShLangRayGenNV,
-    EShLangIntersectNV,
-    EShLangAnyHitNV,
-    EShLangClosestHitNV,
-    EShLangMissNV,
-    EShLangCallableNV,
+    EShLangRayGen,
+    EShLangRayGenNV = EShLangRayGen,
+    EShLangIntersect,
+    EShLangIntersectNV = EShLangIntersect,
+    EShLangAnyHit,
+    EShLangAnyHitNV = EShLangAnyHit,
+    EShLangClosestHit,
+    EShLangClosestHitNV = EShLangClosestHit,
+    EShLangMiss,
+    EShLangMissNV = EShLangMiss,
+    EShLangCallable,
+    EShLangCallableNV = EShLangCallable,
     EShLangTaskNV,
     EShLangMeshNV,
-    EShLangCount,
+    LAST_ELEMENT_MARKER(EShLangCount),
 } EShLanguage;         // would be better as stage, but this is ancient now
 
 typedef enum {
@@ -110,14 +116,21 @@ typedef enum {
     EShLangGeometryMask       = (1 << EShLangGeometry),
     EShLangFragmentMask       = (1 << EShLangFragment),
     EShLangComputeMask        = (1 << EShLangCompute),
-    EShLangRayGenNVMask       = (1 << EShLangRayGenNV),
-    EShLangIntersectNVMask    = (1 << EShLangIntersectNV),
-    EShLangAnyHitNVMask       = (1 << EShLangAnyHitNV),
-    EShLangClosestHitNVMask   = (1 << EShLangClosestHitNV),
-    EShLangMissNVMask         = (1 << EShLangMissNV),
-    EShLangCallableNVMask     = (1 << EShLangCallableNV),
+    EShLangRayGenMask         = (1 << EShLangRayGen),
+    EShLangRayGenNVMask       = EShLangRayGenMask,
+    EShLangIntersectMask      = (1 << EShLangIntersect),
+    EShLangIntersectNVMask    = EShLangIntersectMask,
+    EShLangAnyHitMask         = (1 << EShLangAnyHit),
+    EShLangAnyHitNVMask       = EShLangAnyHitMask,
+    EShLangClosestHitMask     = (1 << EShLangClosestHit),
+    EShLangClosestHitNVMask   = EShLangClosestHitMask,
+    EShLangMissMask           = (1 << EShLangMiss),
+    EShLangMissNVMask         = EShLangMissMask,
+    EShLangCallableMask       = (1 << EShLangCallable),
+    EShLangCallableNVMask     = EShLangCallableMask,
     EShLangTaskNVMask         = (1 << EShLangTaskNV),
     EShLangMeshNVMask         = (1 << EShLangMeshNV),
+    LAST_ELEMENT_MARKER(EShLanguageMaskCount),
 } EShLanguageMask;
 
 namespace glslang {
@@ -128,18 +141,21 @@ typedef enum {
     EShSourceNone,
     EShSourceGlsl,               // GLSL, includes ESSL (OpenGL ES GLSL)
     EShSourceHlsl,               // HLSL
+    LAST_ELEMENT_MARKER(EShSourceCount),
 } EShSource;                     // if EShLanguage were EShStage, this could be EShLanguage instead
 
 typedef enum {
     EShClientNone,               // use when there is no client, e.g. for validation
     EShClientVulkan,
     EShClientOpenGL,
+    LAST_ELEMENT_MARKER(EShClientCount),
 } EShClient;
 
 typedef enum {
     EShTargetNone,
     EShTargetSpv,                 // SPIR-V (preferred spelling)
     EshTargetSpv = EShTargetSpv,  // legacy spelling
+    LAST_ELEMENT_MARKER(EShTargetCount),
 } EShTargetLanguage;
 
 typedef enum {
@@ -147,6 +163,7 @@ typedef enum {
     EShTargetVulkan_1_1 = (1 << 22) | (1 << 12),      // Vulkan 1.1
     EShTargetVulkan_1_2 = (1 << 22) | (2 << 12),      // Vulkan 1.2
     EShTargetOpenGL_450 = 450,                        // OpenGL
+    LAST_ELEMENT_MARKER(EShTargetClientVersionCount),
 } EShTargetClientVersion;
 
 typedef EShTargetClientVersion EshTargetClientVersion;
@@ -158,6 +175,7 @@ typedef enum {
     EShTargetSpv_1_3 = (1 << 16) | (3 << 8),          // SPIR-V 1.3
     EShTargetSpv_1_4 = (1 << 16) | (4 << 8),          // SPIR-V 1.4
     EShTargetSpv_1_5 = (1 << 16) | (5 << 8),          // SPIR-V 1.5
+    LAST_ELEMENT_MARKER(EShTargetLanguageVersionCount),
 } EShTargetLanguageVersion;
 
 struct TInputLanguage {
@@ -207,6 +225,7 @@ typedef enum {
     EShOptNone,
     EShOptSimple,       // Optimizations that can be done quickly
     EShOptFull,         // Optimizations that will take more time
+    LAST_ELEMENT_MARKER(EshOptLevelCount),
 } EShOptimizationLevel;
 
 //
@@ -215,6 +234,7 @@ typedef enum {
 typedef enum {
     EShTexSampTransKeep,   // keep textures and samplers as is (default)
     EShTexSampTransUpgradeTextureRemoveSampler,  // change texture w/o embeded sampler into sampled texture and throw away all samplers
+    LAST_ELEMENT_MARKER(EShTexSampTransCount),
 } EShTextureSamplerTransformMode;
 
 //
@@ -237,6 +257,7 @@ enum EShMessages {
     EShMsgHlslLegalization  = (1 << 12), // enable HLSL Legalization messages
     EShMsgHlslDX9Compatible = (1 << 13), // enable HLSL DX9 compatible mode (right now only for samplers)
     EShMsgBuiltinSymbolTable = (1 << 14), // print the builtin symbol table
+    LAST_ELEMENT_MARKER(EShMsgCount),
 };
 
 //
@@ -250,6 +271,7 @@ typedef enum {
     EShReflectionSeparateBuffers   = (1 << 3), // buffer variables and buffer blocks are reflected separately
     EShReflectionAllBlockVariables = (1 << 4), // reflect all variables in blocks, even if they are inactive
     EShReflectionUnwrapIOBlocks    = (1 << 5), // unwrap input/output blocks the same as with uniform blocks
+    LAST_ELEMENT_MARKER(EShReflectionCount),
 } EShReflectionOptions;
 
 //
