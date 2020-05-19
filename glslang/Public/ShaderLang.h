@@ -68,7 +68,7 @@
 // This should always increase, as some paths to do not consume
 // a more major number.
 // It should increment by one when new functionality is added.
-#define GLSLANG_MINOR_VERSION 13
+#define GLSLANG_MINOR_VERSION 14
 
 //
 // Call before doing any other compiler/linker operations.
@@ -264,13 +264,14 @@ enum EShMessages : unsigned {
 // Options for building reflection
 //
 typedef enum {
-    EShReflectionDefault           = 0,        // default is original behaviour before options were added
-    EShReflectionStrictArraySuffix = (1 << 0), // reflection will follow stricter rules for array-of-structs suffixes
-    EShReflectionBasicArraySuffix  = (1 << 1), // arrays of basic types will be appended with [0] as in GL reflection
-    EShReflectionIntermediateIO    = (1 << 2), // reflect inputs and outputs to program, even with no vertex shader
-    EShReflectionSeparateBuffers   = (1 << 3), // buffer variables and buffer blocks are reflected separately
-    EShReflectionAllBlockVariables = (1 << 4), // reflect all variables in blocks, even if they are inactive
-    EShReflectionUnwrapIOBlocks    = (1 << 5), // unwrap input/output blocks the same as with uniform blocks
+    EShReflectionDefault            = 0,        // default is original behaviour before options were added
+    EShReflectionStrictArraySuffix  = (1 << 0), // reflection will follow stricter rules for array-of-structs suffixes
+    EShReflectionBasicArraySuffix   = (1 << 1), // arrays of basic types will be appended with [0] as in GL reflection
+    EShReflectionIntermediateIO     = (1 << 2), // reflect inputs and outputs to program, even with no vertex shader
+    EShReflectionSeparateBuffers    = (1 << 3), // buffer variables and buffer blocks are reflected separately
+    EShReflectionAllBlockVariables  = (1 << 4), // reflect all variables in blocks, even if they are inactive
+    EShReflectionUnwrapIOBlocks     = (1 << 5), // unwrap input/output blocks the same as with uniform blocks
+    EShReflectionSharedStd140Blocks = (1 << 6), // Apply std140/shared rules for ubo to ssbo
     LAST_ELEMENT_MARKER(EShReflectionCount),
 } EShReflectionOptions;
 
